@@ -1,0 +1,51 @@
+{
+  "Serilog": {
+    "Using": [
+      "Serilog",
+      "Serilog.Sinks.Debug",
+      "Serilog.Sinks.File",
+      "Serilog.Sinks.Async"
+    ],
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Information",
+        "ReactiveUI": "Information"
+      }
+    },
+    "Enrich": [
+      "FromLogContext"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "Debug",
+              "Args": {
+                "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Asst}{Message:lj}{NewLine}{Exception}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "File",
+              "Args": {
+                "path": "logs\\.log",
+                "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss}] [{Level:u3}] {Asst}{Message:lj}{NewLine}{Exception}",
+                "rollingInterval": "Day",
+                "shared": true
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

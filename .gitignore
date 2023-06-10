@@ -1,0 +1,8 @@
+﻿.vs
+.idea
+*.iml
+out
+gen
+# 忽略子文件夹的 bin 和obj
+*/bin/*
+*/obj/*
